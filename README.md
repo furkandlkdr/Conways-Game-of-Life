@@ -6,6 +6,8 @@
 - pygame
 - numpy
 
+## Photos of the app (you should try on your own)
+
 <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
     <img src="First.png" alt="First Image" width="250px" style="margin-right: 10px;">
     <img src="Second.png" alt="Second Image" width="250px style="margin-right: 10px;">
