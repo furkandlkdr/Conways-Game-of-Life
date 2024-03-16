@@ -8,7 +8,6 @@ COLOR_DIE_NEXT = (170, 170, 170)
 COLOR_ALIVE_NEXT = (255, 255, 255)
 
 def countNeighbors(cells, row, col, rows, cols):
-    # Count the number of neighbors that are alive, when it overflown, look for first values
     count = 0
     for i in range(-1, 2):
         for j in range(-1, 2):
@@ -21,6 +20,7 @@ def update(screen, cells, size, with_progress=False):
     updated_cells = np.zeros((cells.shape[0], cells.shape[1]), dtype=bool)
 
     for row, col in np.ndindex(cells.shape):
+        # Count the number of neighbors that are alive, max and min functions looking for null and correcting them.
         neighbors = countNeighbors(cells, row, col, cells.shape[0], cells.shape[1])
         # Assign color that will be used to draw the cell
         color = COLOR_BG if cells[row, col] == 0 else COLOR_ALIVE_NEXT
@@ -42,13 +42,16 @@ def update(screen, cells, size, with_progress=False):
     return updated_cells
 def main():
     # Initialize the pygame
+    width = 800
+    height = 600
+    resulation = 10;
     pygame.init()
-    screen = pygame.display.set_mode((800,600))
+    screen = pygame.display.set_mode((width, height))
 
     # Create the grid
-    cells = np.zeros((60, 80))
+    cells = np.zeros((height / resulation, width / resulation))
     screen.fill(COLOR_GRID)
-    update(screen, cells, 10)
+    update(screen, cells, resulation)
 
     pygame.display.flip()
     pygame.display.update()
@@ -65,20 +68,20 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     running = not running
-                    update(screen, cells, 10)
+                    update(screen, cells, resulation)
                     pygame.display.update()
             # Draw a cell if the user clicks on the grid
             if pygame.mouse.get_pressed()[0]:
                 x, y = pygame.mouse.get_pos()
-                if x < 800 and y < 600:
-                    cells[y // 10, x // 10] = 1
-                    update(screen, cells, 10)
+                if x < width and y < height:
+                    cells[y // resulation, x // resulation] = 1
+                    update(screen, cells, resulation)
                     pygame.display.update()
         # Clear the screen
         screen.fill(COLOR_GRID)
         # Update the cells
         if running:
-            cells = update(screen, cells, 10, with_progress=True)
+            cells = update(screen, cells, resulation, with_progress=True)
             pygame.display.update()
 
         time.sleep(0.001)
