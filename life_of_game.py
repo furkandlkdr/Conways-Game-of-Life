@@ -49,7 +49,7 @@ def main():
     screen = pygame.display.set_mode((width, height))
 
     # Create the grid
-    cells = np.zeros((height / resulation, width / resulation))
+    cells = np.zeros((height // resulation, width // resulation))
     screen.fill(COLOR_GRID)
     update(screen, cells, resulation)
 
