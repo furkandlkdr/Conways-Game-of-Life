@@ -7,9 +7,9 @@
 - numpy
 
 <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
-    <img src="First.png" alt="First Image" width="300px" style="margin-right: 10px;">
-    <img src="Second.png" alt="Second Image" width="300px style="margin-right: 10px;">
-    <img src="Third.png" alt="Third Image" width="300px">
+    <img src="First.png" alt="First Image" width="250px" style="margin-right: 10px;">
+    <img src="Second.png" alt="Second Image" width="250px style="margin-right: 10px;">
+    <img src="Third.png" alt="Third Image" width="250px">
 </div>
 
 ## Rules
