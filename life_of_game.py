@@ -7,13 +7,21 @@ COLOR_GRID = (40, 40, 40)
 COLOR_DIE_NEXT = (170, 170, 170)
 COLOR_ALIVE_NEXT = (255, 255, 255)
 
+def countNeighbors(cells, row, col, rows, cols):
+    # Count the number of neighbors that are alive, when it overflown, look for first values
+    count = 0
+    for i in range(-1, 2):
+        for j in range(-1, 2):
+            count += cells[(row + i + rows) % rows, (col + j + cols) % cols]
+    count -= cells[row, col]
+    return count
+
 def update(screen, cells, size, with_progress=False):
     # Make a copy of the cells to update
     updated_cells = np.zeros((cells.shape[0], cells.shape[1]), dtype=bool)
 
     for row, col in np.ndindex(cells.shape):
-        # Count the number of neighbors that are alive
-        neighbors = np.sum(cells[max(0, row-1):min(cells.shape[0], row+2), max(0, col-1):min(cells.shape[1], col+2)]) - cells[row, col]
+        neighbors = countNeighbors(cells, row, col, cells.shape[0], cells.shape[1])
         # Assign color that will be used to draw the cell
         color = COLOR_BG if cells[row, col] == 0 else COLOR_ALIVE_NEXT
 
@@ -62,9 +70,10 @@ def main():
             # Draw a cell if the user clicks on the grid
             if pygame.mouse.get_pressed()[0]:
                 x, y = pygame.mouse.get_pos()
-                cells[y // 10, x // 10] = 1
-                update(screen, cells, 10)
-                pygame.display.update()
+                if x < 800 and y < 600:
+                    cells[y // 10, x // 10] = 1
+                    update(screen, cells, 10)
+                    pygame.display.update()
         # Clear the screen
         screen.fill(COLOR_GRID)
         # Update the cells
