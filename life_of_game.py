@@ -70,11 +70,20 @@ def main():
                     running = not running
                     update(screen, cells, resulation)
                     pygame.display.update()
+                if event.key == pygame.K_RIGHT:
+                    cells = update(screen, cells, resulation, with_progress=True)
+                    pygame.display.update()
             # Draw a cell if the user clicks on the grid
             if pygame.mouse.get_pressed()[0]:
                 x, y = pygame.mouse.get_pos()
                 if x < width and y < height:
                     cells[y // resulation, x // resulation] = 1
+                    update(screen, cells, resulation)
+                    pygame.display.update()
+            if pygame.mouse.get_pressed()[2]:
+                x, y = pygame.mouse.get_pos()
+                if x < width and y < height:
+                    cells[y // resulation, x // resulation] = 0
                     update(screen, cells, resulation)
                     pygame.display.update()
         # Clear the screen
@@ -84,7 +93,7 @@ def main():
             cells = update(screen, cells, resulation, with_progress=True)
             pygame.display.update()
 
-        time.sleep(0.001)
+        time.sleep(0.1)
 
 if __name__ == "__main__":
     main();
