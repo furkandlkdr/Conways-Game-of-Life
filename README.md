@@ -3,8 +3,8 @@
 ## Dependencies
 
 - Python (naturally!)
-- pygame
-- numpy
+- [pygame](https://www.pygame.org/news)
+- [numpy](https://numpy.org/install/)
 
 ## Photos of the app (you should try on your own)
 
