@@ -14,9 +14,7 @@
     <img src="Third.png" alt="Third Image" width="250px">
 </div>
 
-## Rules
-
-### Conway's Game of Life Rules:
+## Conway's Game of Life Rules:
 
 - **Survival:** A live cell with 2 or 3 live neighbors will continue to live.
 - **Death:** A live cell with fewer than 2 or more than 3 live neighbors will die (due to underpopulation or overpopulation).
